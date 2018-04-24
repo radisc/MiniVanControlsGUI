@@ -6,8 +6,7 @@ import port_control
 
 SIZE = 400
 
-port_control.set_off()
-
+port_control.init()
 
 # mouse callback function
 def ac_cb(event,x,y,flags,param):

@@ -28,6 +28,15 @@ GPIO.setup(pin5 , GPIO.OUT)
 GPIO.setup(pin6 , GPIO.OUT)
 GPIO.setup(pin7 , GPIO.OUT)
 
+def init():
+	GPIO.output(pin0, GPIO.HIGH)
+	GPIO.output(pin1, GPIO.HIGH)
+	GPIO.output(pin2, GPIO.HIGH)
+	GPIO.output(pin3, GPIO.HIGH)
+	GPIO.output(pin4, GPIO.HIGH)
+	GPIO.output(pin5, GPIO.HIGH)
+	GPIO.output(pin6, GPIO.HIGH)
+	GPIO.output(pin7, GPIO.HIGH)
 
 def set_off():
 	print ("Shutting off")
