@@ -51,10 +51,12 @@ cv2.setMouseCallback('image',ac_cb)
 #load images
 #cv2.imshow("s<dfasdf",image)
 
-off_img = cv2.resize(cv2.imread("/home/pi/cr_gui/icons/off.jpeg", 0), ( SIZE/2, SIZE/2) )
-low_img = cv2.resize(cv2.imread("/home/pi/cr_gui/icons/low.jpeg", 0), ( SIZE/2, SIZE/2) )
-on_img  = cv2.resize(cv2.imread("/home/pi/cr_gui/icons/on.jpeg",  0), ( SIZE/2, SIZE/2) )
-hi_img  = cv2.resize(cv2.imread("/home/pi/cr_gui/icons/hi.jpeg",  0), ( SIZE/2, SIZE/2) )
+path = "/home/pi/MiniVanControlsGUI/cr_gui"
+
+off_img = cv2.resize(cv2.imread(path + "/icons/off.jpeg", 0), ( SIZE/2, SIZE/2) )
+low_img = cv2.resize(cv2.imread(path + "/icons/low.jpeg", 0), ( SIZE/2, SIZE/2) )
+on_img  = cv2.resize(cv2.imread(path + "/icons/on.jpeg",  0), ( SIZE/2, SIZE/2) )
+hi_img  = cv2.resize(cv2.imread(path + "/icons/hi.jpeg",  0), ( SIZE/2, SIZE/2) )
 
 top = np.hstack((off_img, low_img))
 bottom = np.hstack((on_img, hi_img))
