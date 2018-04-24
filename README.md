@@ -6,4 +6,4 @@ Configuration
 
 To autostart at Rpi boot, add to "/home/pi/.config/lxsession/LXDE-pi/autostart" the line
 
-@bash -c /home/pi/cr_gui/on_reboot.sh
+@bash -c /home/pi/MiniVanControlsGUI/cr_gui/on_reboot.sh
