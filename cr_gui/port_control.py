@@ -8,6 +8,7 @@ import time
 GPIO.setmode(GPIO.BCM)
 
 #definiamo il numero GPIO dei pin in gioco
+'''
 pin0 = 17
 pin1 = 18
 pin2 = 19
@@ -16,6 +17,15 @@ pin4 = 21
 pin5 = 22
 pin6 = 23
 pin7 = 24
+'''
+pin0 = 9
+pin1 = 10
+pin2 = 11
+pin3 = 12
+pin4 = 13
+pin5 = 14
+pin6 = 15
+pin7 = 16
 
 
 #definiamo che pinLedLeft e pinLedRight sono due pin di output
