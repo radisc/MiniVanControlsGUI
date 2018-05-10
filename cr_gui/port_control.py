@@ -77,14 +77,17 @@ def set_3():
 	GPIO.output(pin3, GPIO.LOW)
 	
 def lights_out():	#Guerrilla Radio!
+	print ("lights out")
 	GPIO.output(pin4, GPIO.HIGH)	
 	GPIO.output(pin5, GPIO.HIGH)
 
 def lights_cold():
+	print ("lights cold")
 	GPIO.output(pin4, GPIO.LOW)
 	GPIO.output(pin5, GPIO.HIGH)
 	
 def lights_hot():
+	print ("lights hot")
 	GPIO.output(pin4, GPIO.HIGH)
 	GPIO.output(pin5, GPIO.LOW)
 	
