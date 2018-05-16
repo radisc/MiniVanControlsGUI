@@ -8,16 +8,16 @@ import time
 GPIO.setmode(GPIO.BCM)
 
 #definiamo il numero GPIO dei pin in gioco
-'''
-pin0 = 17
-pin1 = 18
-pin2 = 19
-pin3 = 20
-pin4 = 21
-pin5 = 22
-pin6 = 23
-pin7 = 24
-'''
+
+pin8 = 17
+pin9 = 18
+pin10 = 19
+pin11 = 20
+pin12 = 21
+pin13 = 22
+pin14 = 23
+pin15 = 24
+
 pin0 = 9
 pin1 = 10
 pin2 = 11
@@ -27,76 +27,185 @@ pin5 = 14
 pin6 = 15
 pin7 = 16
 
+pin16 = 4
+pin17 = 5
+pin18 = 6
+pin19 = 7
+pin20 = 8
+pin21 = 25
+pin22 = 26
+pin23 = 27
+
+pins = [pin0,
+pin1,
+pin2,
+pin3 ,
+pin4,
+pin5,
+pin6,
+pin7,
+pin8 ,
+pin9 ,
+pin10 ,
+pin11 ,
+pin12 ,
+pin13,
+pin14 ,
+pin15 ,
+pin16 ,
+pin17 ,
+pin18 ,
+pin19 ,
+pin20 ,
+pin21,
+pin22,
+pin23]
+
 
 #definiamo che pinLedLeft e pinLedRight sono due pin di output
-GPIO.setup(pin0 , GPIO.OUT)
-GPIO.setup(pin1 , GPIO.OUT)
-GPIO.setup(pin2 , GPIO.OUT)
-GPIO.setup(pin3 , GPIO.OUT)
-GPIO.setup(pin4 , GPIO.OUT)
-GPIO.setup(pin5 , GPIO.OUT)
-GPIO.setup(pin6 , GPIO.OUT)
-GPIO.setup(pin7 , GPIO.OUT)
 
-def init():
-	GPIO.output(pin0, GPIO.HIGH)
-	GPIO.output(pin1, GPIO.HIGH)
-	GPIO.output(pin2, GPIO.HIGH)
-	GPIO.output(pin3, GPIO.HIGH)
-	GPIO.output(pin4, GPIO.HIGH)
-	GPIO.output(pin5, GPIO.HIGH)
-	GPIO.output(pin6, GPIO.HIGH)
-	GPIO.output(pin7, GPIO.HIGH)
+class port_control():
+	def init(self):				
+		for pin_number in pins:
+			GPIO.setup(pin_number , GPIO.OUT)
+			GPIO.output(pin_number, GPIO.HIGH)
 
-def set_off():
-	print ("Shutting off")
-	GPIO.output(pin0, GPIO.HIGH)
-	GPIO.output(pin1, GPIO.HIGH)
-	GPIO.output(pin2, GPIO.HIGH)
-	GPIO.output(pin3, GPIO.HIGH)
+	def release(self):
+		GPIO.cleanup()
 
-def set_1():
-	print ("1")
-	GPIO.output(pin0, GPIO.LOW)
-	GPIO.output(pin1, GPIO.LOW)
-	GPIO.output(pin2, GPIO.HIGH)
-	GPIO.output(pin3, GPIO.HIGH)
+	def set_off(self):
+		print ("Shutting off")
+		GPIO.output(pins[0], GPIO.HIGH)
+		GPIO.output(pins[1], GPIO.HIGH)
+		GPIO.output(pins[2], GPIO.HIGH)
+		GPIO.output(pins[3], GPIO.HIGH)
 
-def set_2():
-	print ("2")
-	GPIO.output(pin0, GPIO.LOW)
-	GPIO.output(pin1, GPIO.HIGH)
-	GPIO.output(pin2, GPIO.LOW)
-	GPIO.output(pin3, GPIO.HIGH)
+	def set_1(self):
+		print ("1")
+		GPIO.output(pins[0], GPIO.LOW)
+		GPIO.output(pins[1], GPIO.LOW)
+		GPIO.output(pins[2], GPIO.HIGH)
+		GPIO.output(pins[3], GPIO.HIGH)
 
-def set_3():
-	print ("3")
-	GPIO.output(pin0, GPIO.LOW)
-	GPIO.output(pin1, GPIO.HIGH)
-	GPIO.output(pin2, GPIO.HIGH)
-	GPIO.output(pin3, GPIO.LOW)
+	def set_2(self):
+		print ("2")
+		GPIO.output(pins[0], GPIO.LOW)
+		GPIO.output(pins[1], GPIO.HIGH)
+		GPIO.output(pins[2], GPIO.LOW)
+		GPIO.output(pins[3], GPIO.HIGH)
+
+	def set_3(self):
+		print ("3")
+		GPIO.output(pins[0], GPIO.LOW)
+		GPIO.output(pins[1], GPIO.HIGH)
+		GPIO.output(pins[2], GPIO.HIGH)
+		GPIO.output(pins[3], GPIO.LOW)
+		
+	def lights_out(self):	#Guerrilla Radio!
+		print ("lights out")
+		GPIO.output(pins[4], GPIO.HIGH)	
+		GPIO.output(pins[5], GPIO.HIGH)
+
+	def lights_cold(self):
+		print ("lights cold")
+		GPIO.output(pins[4], GPIO.LOW)
+		GPIO.output(pins[5], GPIO.HIGH)
+		
+	def lights_hot(self):
+		print ("lights hot")
+		GPIO.output(pins[4], GPIO.HIGH)
+		GPIO.output(pins[5], GPIO.LOW)
+		
+	def door_switch(self):
+		print "Door switch"
+		#GPIO.output(pins[6, GPIO.HIGH)
+		#time.sleep(0.5)
+		GPIO.output(pins[6], GPIO.LOW)
+		time.sleep(0.5)
+		GPIO.output(pins[6], GPIO.HIGH)
+
+	def defrost(self):
+		print "Sbrinamento"
+		GPIO.output(pins[7], GPIO.LOW)
+		time.sleep(0.5)
+		GPIO.output(pins[7], GPIO.HIGH)
+
+		
+	def floor_lights(self):
+		print "luci a pavimento"
+		GPIO.output(pins[8], GPIO.LOW)
+
+	def tendina_sx(self, stop = True, direction_up = True):
+		if stop == True:
+			print "tendina sx stop"
+			GPIO.output(pins[8], GPIO.HIGH)
+			GPIO.output(pins[9], GPIO.HIGH)
+			return
+			
+		if direction_up == True:
+			GPIO.output(pins[8], GPIO.LOW)
+			GPIO.output(pins[9], GPIO.HIGH)		
+			print "Tendina sx su"
+		else:
+			GPIO.output(pins[8], GPIO.HIGH)
+			GPIO.output(pins[9], GPIO.LOW)
+			print "Tendina sx giu,"
+
+	def tendina_dx(self, stop = True, direction_up = True):
+		if stop == True:
+			GPIO.output(pins[10], GPIO.HIGH)
+			GPIO.output(pins[11], GPIO.HIGH)
+			print "tendina dx stop"
+			return
+		
+		if direction_up == True:
+			GPIO.output(pins[10], GPIO.LOW)
+			GPIO.output(pins[11], GPIO.HIGH)
+			print "Tendina dx su"
+		else:
+			GPIO.output(pins[10], GPIO.HIGH)
+			GPIO.output(pins[11], GPIO.LOW)
+			print "Tendina dx giu'"
+		
+	def heating(self):
+		print "riscalndamento"
+		
+	def front_door_switch(self):
+		print "Front Door switch"
+		GPIO.output(pins[15], GPIO.LOW)
+		time.sleep(0.5)
+		GPIO.output(pins[15], GPIO.HIGH)
+		
+	def switch_signs(self):
+		print "Cartelli"
 	
-def lights_out():	#Guerrilla Radio!
-	print ("lights out")
-	GPIO.output(pin4, GPIO.HIGH)	
-	GPIO.output(pin5, GPIO.HIGH)
-
-def lights_cold():
-	print ("lights cold")
-	GPIO.output(pin4, GPIO.LOW)
-	GPIO.output(pin5, GPIO.HIGH)
+	def trunck_lights(self):
+		print "Luce Bagagliaio"
 	
-def lights_hot():
-	print ("lights hot")
-	GPIO.output(pin4, GPIO.HIGH)
-	GPIO.output(pin5, GPIO.LOW)
+	def driver_seat_light(self):
+		print "Luce Autista"
 	
-def door_switch():
-	print "Door switch"
-	#GPIO.output(pin6, GPIO.HIGH)
-	#time.sleep(0.5)
-	GPIO.output(pin6, GPIO.LOW)
-	time.sleep(0.5)
-	GPIO.output(pin6, GPIO.HIGH)
+	def stop_request_light(self):
+		print "Fermata Prenota"
+	
+	def ventilation(self, status):
+		
+		if status > 0:
+			GPIO.output(pins[13], GPIO.HIGH)
+			GPIO.output(pins[14], GPIO.HIGH)
+			print "Aspirazione"
+		
+		if status == 0:
+			GPIO.output(pins[13], GPIO.LOW)
+			GPIO.output(pins[14], GPIO.HIGH)
+			print "Aspirazione OFF"
+			
+		if status < 0:
+			GPIO.output(pins[13], GPIO.HIGH)
+			GPIO.output(pins[14], GPIO.LOW)
+			print "Soffiaggio" 
 
-
+'''	
+def mini-bar-fridge():
+	print "Frigorifero"
+'''
