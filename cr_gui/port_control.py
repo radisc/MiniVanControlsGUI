@@ -65,6 +65,15 @@ pin23]
 #definiamo che pinLedLeft e pinLedRight sono due pin di output
 
 class port_control():
+	
+	floor_lights_on = 		False
+	heating_on = 			False
+	signs_on = 				False
+	ventialtion_fan_on = 	False
+	trunk_lights_on = 		False
+	driver_seat_light_on = 	False
+	stop_request_light_on = False
+	
 	def init(self):				
 		for pin_number in pins:
 			GPIO.setup(pin_number , GPIO.OUT)
@@ -132,8 +141,14 @@ class port_control():
 
 		
 	def floor_lights(self):
-		print "luci a pavimento"
-		GPIO.output(pins[8], GPIO.LOW)
+		if self.floor_lights_on == False:
+			GPIO.output(pins[8], GPIO.LOW)
+			self.floor_lights_on = True
+			print "luci a pavimento ON"
+		else:
+			GPIO.output(pins[8], GPIO.HIGH)
+			self.floor_lights = False
+			print "luci a pavimento OFF"			
 
 	def tendina_sx(self, stop = True, direction_up = True):
 		if stop == True:
@@ -168,7 +183,15 @@ class port_control():
 			print "Tendina dx giu'"
 		
 	def heating(self):
-		print "riscalndamento"
+		if self.heating_on == False:
+			print "riscalndamento ON"
+			GPIO.output(pins[14], GPIO.LOW)
+			self.heating_on = True
+		else:
+			print "riscalndamento OFF"
+			GPIO.output(pins[14], GPIO.HIGH)
+			self.heating_on = False
+			
 		
 	def front_door_switch(self):
 		print "Front Door switch"
@@ -177,32 +200,65 @@ class port_control():
 		GPIO.output(pins[15], GPIO.HIGH)
 		
 	def switch_signs(self):
-		print "Cartelli"
+		if self.signs_on == False:
+			print "Cartelli ON"
+			GPIO.output(pins[16], GPIO.LOW)
+			self.signs_on = True
+		else:
+			print "cartelli OFF"
+			GPIO.output(pins[16], GPIO.HIGH)
+			self.signs_on = False
 	
 	def trunck_lights(self):
-		print "Luce Bagagliaio"
+		if self.trunk_lights_on == False:
+			print "Luce Bagagliaio ON"
+			GPIO.output(pins[17], GPIO.LOW)
+			self.trunk_lights_on = True
+		else:
+			print "Luce Bagagliaio OFF"
+			GPIO.output(pins[17], GPIO.HIGH)
+			self.trunk_lights_on = False
 	
 	def driver_seat_light(self):
-		print "Luce Autista"
+		if self.driver_seat_light_on == False:
+			print "Luce Autista ON"
+			GPIO.output(pins[18], GPIO.LOW)
+			self.driver_seat_light_on = True
+		else:
+			print "Luce Autista OFF"
+			GPIO.output(pins[18], GPIO.HIGH)
+			self.driver_seat_light_on = False
+		
 	
 	def stop_request_light(self):
-		print "Fermata Prenota"
+		if self.stop_request_light_on == False:
+			print "Fermata Prenota ON"
+			GPIO.output(pins[19], GPIO.LOW)
+			self.stop_request_light_on = True
+		else:
+			print "Fermata Prenota OFF"
+			GPIO.output(pins[19], GPIO.HIGH)
+			self.stop_request_light_on = False
+
 	
 	def ventilation(self, status):
 		
 		if status > 0:
 			GPIO.output(pins[13], GPIO.HIGH)
-			GPIO.output(pins[14], GPIO.HIGH)
+			GPIO.output(pins[13], GPIO.HIGH)
+			self.ventialtion_fan_on = True
 			print "Aspirazione"
 		
 		if status == 0:
-			GPIO.output(pins[13], GPIO.LOW)
-			GPIO.output(pins[14], GPIO.HIGH)
+			self.ventialtion_fan_on = False			
+			GPIO.output(pins[12], GPIO.LOW)
+			GPIO.output(pins[13], GPIO.HIGH)
 			print "Aspirazione OFF"
 			
 		if status < 0:
-			GPIO.output(pins[13], GPIO.HIGH)
-			GPIO.output(pins[14], GPIO.LOW)
+			self.ventialtion_fan_on = True
+			GPIO.output(pins[12], GPIO.HIGH)
+			GPIO.output(pins[13], GPIO.LOW)
 			print "Soffiaggio" 
 
 '''	

@@ -3,7 +3,7 @@
 
 import cv2
 import numpy as np
-import port_control
+import i2c_port_control
 
 SIZE = 133
 
@@ -145,12 +145,12 @@ if __name__ == "__main__":
 	cv2.imshow('main', canvas)
 	cv2.waitKey(1)
 	
-	port_control = port_control.port_control()
-	port_control.init()
+	port_control = i2c_port_control.port_control() #port_control.port_control()
+	#port_control.init()
 	
 	while(1):
 		cv2.imshow('main', canvas)
 		if cv2.waitKey(40) & 0xFF == 27:
 			break
 	cv2.destroyAllWindows()
-	port_control.release()
+	#port_control.release()
